@@ -69,8 +69,12 @@ class MainActivity : AppCompatActivity() {
             stopForegroundForConnection()
         }
 
-        notify_notification.setOnClickListener {
-            notifyNotification()
+        start_notify_notification.setOnClickListener {
+            startNotifyNotification()
+        }
+
+        stop_notify_notification.setOnClickListener {
+            stopNotifyNotification()
         }
     }
 
@@ -80,7 +84,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setNotification(title: String, text: String): NotificationCompat.Builder {
         var mBuilder=NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.drawable.test)
             .setContentTitle(title)
             .setContentText(text)
             .setOngoing(true) //User not clear notification
@@ -100,8 +104,12 @@ class MainActivity : AppCompatActivity() {
         markService?.stopForeground(true)
     }
 
-    private fun notifyNotification(){
+    private fun startNotifyNotification(){
         var notificationManager=getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(1,setNotification(TITLE+"1",TEXT+"1").build())
     }
-}
+
+    private fun stopNotifyNotification(){
+        var notificationManager=getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.cancel(1)
+    }}
